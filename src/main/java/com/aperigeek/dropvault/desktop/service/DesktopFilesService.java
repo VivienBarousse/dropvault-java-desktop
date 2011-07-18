@@ -53,16 +53,12 @@ public class DesktopFilesService extends AbstractFilesService implements FilesSe
 
     @Override
     protected String getBaseURI() {
-        try {
-            return new DropDAVClient(getUsername(), getPassword()).getBaseURI();
-        } catch (Exception ex) {
-            throw new RuntimeException("Server unavailable", ex);
-        }
+        return configManager.getValue("base.uri", null);
     }
 
     @Override
-    protected void setBaseURI(String baseUri) {
-        
+    protected void storeBaseURI(String baseUri) {
+        configManager.setValue("base.uri", baseUri);
     }
     
 }
